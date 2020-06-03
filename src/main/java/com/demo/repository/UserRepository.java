@@ -2,6 +2,7 @@ package com.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -22,8 +23,20 @@ public interface UserRepository {
 	})
 	List<User>findAll();
 	
+	@Select("select * from users where id=#{id}")
+	@Results(value = {
+			@Result(property = "id",column="id"),
+			@Result(property = "firstName",column="first_name"),
+			@Result(property = "lastName",column="last_name"),
+			@Result(property = "email",column = "email")
+	})
+	User findById(int id);
+	
 	@Insert("insert into users (first_name,last_name,email) values"
 			+ "(#{firstName},#{lastName},#{email})")
 	public int insert(User user);
+	
+	@Delete("delete from users where id=#{id}")
+	public int delete(int id);
 	
 }

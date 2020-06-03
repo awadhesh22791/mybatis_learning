@@ -29,6 +29,9 @@ public class MyBatisLearningApplication implements CommandLineRunner {
 		int newUserId=userRepository.insert(newUser);
 		logger.info("Inserting -> {}", newUserId);
 		logger.info("Inserted user -> {}",userRepository.findAll().toString());
+		User existingUser=userRepository.findById(newUserId);
+		logger.info("Found user -> {}",existingUser.toString());
+		logger.info("Deleting user -> {}",userRepository.delete(newUserId));
 	}
 
 }
