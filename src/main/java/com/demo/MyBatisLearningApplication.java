@@ -31,6 +31,11 @@ public class MyBatisLearningApplication implements CommandLineRunner {
 		logger.info("Inserted user -> {}",userRepository.findAll().toString());
 		User existingUser=userRepository.findById(newUserId);
 		logger.info("Found user -> {}",existingUser.toString());
+		existingUser.setFirstName("Anna");
+		existingUser.setLastName("Howard");
+		existingUser.setEmail("anna.howard@email.com");
+		logger.info("Updating user -> {}",userRepository.update(existingUser));
+		logger.info("Update user -> {}",userRepository.findById(existingUser.getId()).toString());
 		logger.info("Deleting user -> {}",userRepository.delete(newUserId));
 	}
 
